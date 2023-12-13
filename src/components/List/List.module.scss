@@ -1,0 +1,13 @@
+.list {
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.emptyData {
+  text-align: center;
+  margin-bottom: 20px;
+  color: gray;
+}
