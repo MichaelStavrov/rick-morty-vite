@@ -38,8 +38,17 @@ const useFetchData = <T>(dataType: DataType) => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
 
-  const { heroes, setHeroes, locations, setLocations, episodes, setEpisodes } =
-    useDataContext();
+  const {
+    heroes,
+    setHeroes,
+    locations,
+    setLocations,
+    episodes,
+    setEpisodes,
+    resetEpisodes,
+    resetHeroes,
+    resetLocations,
+  } = useDataContext();
 
   useEffect(() => {
     setIsLoading(true);
@@ -82,20 +91,20 @@ const useFetchData = <T>(dataType: DataType) => {
     return () => {
       switch (dataType) {
         case 'character':
-          setHeroes([]);
+          resetHeroes();
           break;
         case 'location':
-          setLocations([]);
+          resetLocations();
           break;
         case 'episode':
-          setEpisodes([]);
+          resetEpisodes();
           break;
 
         default:
           break;
       }
     };
-  }, [dataType, setEpisodes, setHeroes, setLocations]);
+  }, [dataType, resetEpisodes, resetHeroes, resetLocations]);
 
   const onLoad = () => setPage((prev) => prev + 1);
 

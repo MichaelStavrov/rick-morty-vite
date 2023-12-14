@@ -15,6 +15,9 @@ interface DataState {
   setHeroes: (data: CharacterData[]) => void;
   setLocations: (data: LocationData[]) => void;
   setEpisodes: (data: EpisodData[]) => void;
+  resetHeroes: () => void;
+  resetLocations: () => void;
+  resetEpisodes: () => void;
 }
 
 const DataContext = createContext<DataState>({} as DataState);
@@ -39,6 +42,10 @@ const DataProvider: FC<PropsWithChildren> = ({ children }) => {
     []
   );
 
+  const resetHeroes = useCallback(() => setHeroes([]), []);
+  const resetLocations = useCallback(() => setLocations([]), []);
+  const resetEpisodes = useCallback(() => setEpisodes([]), []);
+
   const state: DataState = {
     heroes,
     locations,
@@ -46,6 +53,9 @@ const DataProvider: FC<PropsWithChildren> = ({ children }) => {
     setHeroes: cachedSetHeroes,
     setLocations: cachedsetLocations,
     setEpisodes: cachedsetEpisodes,
+    resetHeroes,
+    resetLocations,
+    resetEpisodes,
   };
 
   return <DataContext.Provider value={state}>{children}</DataContext.Provider>;
