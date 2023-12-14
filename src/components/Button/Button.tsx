@@ -1,8 +1,13 @@
-import React, { FC, ButtonHTMLAttributes, CSSProperties } from 'react';
+import React, { FC, CSSProperties } from 'react';
+import {
+  ElementProps,
+  Button as MButton,
+  ButtonProps as MButtonProps,
+} from '@mantine/core';
 
-import styles from './Button.module.scss';
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps
+  extends MButtonProps,
+    ElementProps<'button', keyof MButtonProps> {
   view?: 'link';
   mw?: CSSProperties['maxWidth'];
 }
@@ -15,14 +20,9 @@ const Button: FC<ButtonProps> = ({
   ...rest
 }) => {
   return (
-    <button
-      style={{ maxWidth: mw }}
-      className={`${styles.button} ${view === 'link' && styles.link}`}
-      type={type}
-      {...rest}
-    >
+    <MButton style={{ maxWidth: mw }} fullWidth type={type} {...rest}>
       {children}
-    </button>
+    </MButton>
   );
 };
 

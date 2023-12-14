@@ -7,6 +7,7 @@ import React, {
   CSSProperties,
   ReactNode,
 } from 'react';
+import { TextInput } from '@mantine/core';
 import cn from 'classnames';
 
 import { HandleChangeProps } from './types';
@@ -66,8 +67,6 @@ const TextField: FC<TextFieldProps> = ({
     [styles.disabled]: disabled,
   };
 
-  const isError = !disabled && errorMessage;
-
   return (
     <div className={cn(styles.textFieldContainer, fieldSizeVariants)}>
       {label && (
@@ -78,21 +77,19 @@ const TextField: FC<TextFieldProps> = ({
       )}
       <div className={styles.inputContainer}>
         {icon && <div className={styles.icon}>{icon}</div>}
-        <input
+        <TextInput
           style={{ borderRadius: br, paddingLeft: icon ? 40 : undefined }}
-          className={cn(styles.input, {
-            [styles.inputError]: isError,
-          })}
           id={id ?? name}
           type={type}
           value={value}
           onChange={handleValueChange}
           autoFocus={autoFocus}
           disabled={disabled}
+          error={errorMessage}
           {...rest}
+          size='md'
         />
       </div>
-      {isError && <span className={styles.error}>{errorMessage}</span>}
     </div>
   );
 };

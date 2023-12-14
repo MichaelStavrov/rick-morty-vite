@@ -4,6 +4,7 @@ import AuthForm from '../../components/AuthForm';
 import { signInFields } from './fields';
 import { useAuth } from 'context/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { RoutesMap } from '@/routesMap';
 
 interface SignInpProps {
   // onSubmit: (values: Record<string, string>) => void;
@@ -26,7 +27,7 @@ const SignIn: FC<SignInpProps> = () => {
     if (!name) return;
 
     auth.signIn({ name }, () => {
-      navigate(state.from);
+      navigate(state?.from ?? RoutesMap.home);
     });
   };
 
